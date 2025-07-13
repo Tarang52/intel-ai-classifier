@@ -31,14 +31,16 @@
   </style>
 </head>
 <body>
-  <div class="container mx-auto p-4 max-w-7xl">
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-6">
 
-    <!-- System Status Bar -->
-    <div class="bg-[#1a1f2e] rounded-lg p-4 mb-6 flex justify-between items-center">
-      <div class="flex items-center space-x-4">
-        <i class="bi bi-display text-gray-400"></i>
-        <span class="text-gray-400">SYSTEM_STATUS</span>
-        <div class="flex items-center space-x-4">
+    <!-- Status Bar -->
+    <div class="bg-[#1a1f2e] rounded-lg p-4 mb-6 flex flex-col md:flex-row md:justify-between md:items-center gap-4">
+      <div class="flex flex-col md:flex-row md:items-center md:space-x-4 space-y-2 md:space-y-0">
+        <div class="flex items-center space-x-2">
+          <i class="bi bi-display text-gray-400"></i>
+          <span class="text-gray-400">SYSTEM_STATUS</span>
+        </div>
+        <div class="flex flex-wrap gap-4">
           <div class="flex items-center">
             <span class="status-dot bg-green-500"></span>
             <span class="text-green-500">API_ONLINE</span>
@@ -53,12 +55,12 @@
           </div>
         </div>
       </div>
-      <div class="flex space-x-4">
-        <div class="bg-[#1e2433] px-4 py-2 rounded">
+      <div class="flex gap-4 justify-between md:justify-end">
+        <div class="bg-[#1e2433] px-4 py-2 rounded text-center text-sm">
           <span class="text-gray-400">CLASSIFICATIONS:</span>
           <span class="text-white" id="classificationCount">0</span>
         </div>
-        <div class="bg-[#1e2433] px-4 py-2 rounded">
+        <div class="bg-[#1e2433] px-4 py-2 rounded text-center text-sm">
           <span class="text-gray-400">UPTIME:</span>
           <span class="text-white">99.9%</span>
         </div>
@@ -66,37 +68,37 @@
     </div>
 
     <!-- Upload + Info Grid -->
-    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-      <!-- Upload -->
-      <div class="lg:col-span-2 bg-[#1a1f2e] rounded-lg p-6">
+    <div class="grid grid-cols-1 xl:grid-cols-3 gap-6">
+      <!-- Upload Section -->
+      <div class="xl:col-span-2 bg-[#1a1f2e] rounded-lg p-6">
         <div class="mb-4">
           <h2 class="text-xl font-bold mb-2">IMAGE_UPLOAD_MODULE</h2>
           <p class="text-gray-400 text-sm">neural_network.classify(mechanical_part_image) → prediction_result</p>
-          <div class="flex space-x-4 mt-2">
+          <div class="flex flex-wrap gap-4 mt-2 text-sm">
             <span class="text-cyan-500"><i class="bi bi-cpu"></i> AI_POWERED</span>
             <span class="text-green-500"><i class="bi bi-activity"></i> REAL_TIME</span>
             <span class="text-yellow-500"><i class="bi bi-lightning"></i> HIGH_ACCURACY</span>
           </div>
         </div>
 
-        <div class="upload-area p-8 text-center" id="dropZone">
-          <i class="bi bi-image text-6xl text-cyan-500 mb-4"></i>
-          <h3 class="text-xl mb-2">UPLOAD_MECHANICAL_PART</h3>
-          <p class="text-gray-400 mb-2">drag_and_drop || click_to_select</p>
-          <p class="text-gray-500 text-sm mb-4">SUPPORTED: JPG, PNG, WEBP • MAX_SIZE: 10MB</p>
-          <button class="bg-cyan-500 hover:bg-cyan-600 text-white px-6 py-2 rounded-md transition-colors" onclick="fileInput.click()">
+        <div class="upload-area p-6 sm:p-8 text-center" id="dropZone">
+          <i class="bi bi-image text-5xl sm:text-6xl text-cyan-500 mb-4"></i>
+          <h3 class="text-lg sm:text-xl mb-2">UPLOAD_MECHANICAL_PART</h3>
+          <p class="text-gray-400 mb-2 text-sm">drag_and_drop || click_to_select</p>
+          <p class="text-gray-500 text-xs mb-4">SUPPORTED: JPG, PNG, WEBP • MAX_SIZE: 10MB</p>
+          <button class="bg-cyan-500 hover:bg-cyan-600 text-white px-4 py-2 rounded-md transition-colors" onclick="fileInput.click()">
             SELECT_FILE()
           </button>
           <input type="file" id="fileInput" class="hidden" accept=".jpg,.jpeg,.png,.webp" />
         </div>
 
-        <!-- Image Preview -->
+        <!-- Preview -->
         <div id="previewBox" class="hidden mt-6 text-center">
           <h3 class="text-md text-gray-400 mb-2">IMAGE_PREVIEW</h3>
           <img id="previewImage" class="mx-auto max-h-64 rounded-lg border border-cyan-700 shadow-md" />
         </div>
 
-        <!-- Result Box -->
+        <!-- Result -->
         <div id="result" class="mt-6 hidden bg-[#232836] rounded p-4 text-center border border-cyan-700">
           <h3 class="text-xl font-semibold mb-2 text-cyan-400">🔍 Prediction Result</h3>
           <p id="resultClass" class="text-lg text-white"></p>
@@ -104,27 +106,25 @@
         </div>
       </div>
 
-      <!-- Sidebar Info -->
-
-        <div class="bg-[#1a1f2e] rounded-lg p-6">
-          <h3 class="text-lg mb-4">SYSTEM_INFO</h3>
-          <div class="space-y-4">
-            <div class="bg-[#232836] p-4 rounded">
-              <p class="text-gray-400 text-sm">MODEL_VERSION</p>
-              <p class="text-cyan-500">v2.1.3-stable</p>
-            </div>
-            <div class="bg-[#232836] p-4 rounded">
-              <p class="text-gray-400 text-sm">TRAINING_DATA</p>
-              <p class="text-green-500">847 part_types</p>
-            </div>
-            <div class="bg-[#232836] p-4 rounded">
-              <p class="text-gray-400 text-sm">ACCURACY_RATE</p>
-              <p class="text-white">97.57%</p>
-            </div>
-            <div class="bg-[#232836] p-4 rounded">
-              <p class="text-gray-400 text-sm">AVG_RESPONSE</p>
-              <p class="text-yellow-500">2.3 seconds</p>
-            </div>
+      <!-- Info Sidebar -->
+      <div class="bg-[#1a1f2e] rounded-lg p-6">
+        <h3 class="text-lg mb-4">SYSTEM_INFO</h3>
+        <div class="space-y-4">
+          <div class="bg-[#232836] p-4 rounded text-sm">
+            <p class="text-gray-400">MODEL_VERSION</p>
+            <p class="text-cyan-500">v2.1.3-stable</p>
+          </div>
+          <div class="bg-[#232836] p-4 rounded text-sm">
+            <p class="text-gray-400">TRAINING_DATA</p>
+            <p class="text-green-500">847 part_types</p>
+          </div>
+          <div class="bg-[#232836] p-4 rounded text-sm">
+            <p class="text-gray-400">ACCURACY_RATE</p>
+            <p class="text-white">97.57%</p>
+          </div>
+          <div class="bg-[#232836] p-4 rounded text-sm">
+            <p class="text-gray-400">AVG_RESPONSE</p>
+            <p class="text-yellow-500">2.3 seconds</p>
           </div>
         </div>
       </div>
@@ -146,25 +146,19 @@
     const previewBox = document.getElementById('previewBox');
     const previewImage = document.getElementById('previewImage');
 
-    // Prevent default drag behaviors
-    ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+    // Drag events
+    ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName =>
       dropZone.addEventListener(eventName, e => {
         e.preventDefault();
         e.stopPropagation();
-      }, false);
-    });
+      })
+    );
 
     ['dragenter', 'dragover'].forEach(e => dropZone.addEventListener(e, () => dropZone.classList.add('bg-[#1e2433]')));
-    ['dragleave', 'drop'].forEach(e => dropZone.classList.remove('bg-[#1e2433]'));
+    ['dragleave', 'drop'].forEach(e => dropZone.addEventListener(e, () => dropZone.classList.remove('bg-[#1e2433]')));
 
-    dropZone.addEventListener('drop', e => {
-      const files = e.dataTransfer.files;
-      handleFiles(files);
-    });
-
-    fileInput.addEventListener('change', function () {
-      handleFiles(this.files);
-    });
+    dropZone.addEventListener('drop', e => handleFiles(e.dataTransfer.files));
+    fileInput.addEventListener('change', () => handleFiles(fileInput.files));
 
     async function handleFiles(files) {
       const file = files[0];
@@ -175,13 +169,13 @@
 
       // Show preview
       const reader = new FileReader();
-      reader.onload = function (e) {
+      reader.onload = e => {
         previewImage.src = e.target.result;
         previewBox.classList.remove("hidden");
       };
       reader.readAsDataURL(file);
 
-      // Send to backend
+      // Upload to backend
       const formData = new FormData();
       formData.append("file", file);
 
@@ -190,13 +184,12 @@
       resultConfidence.innerHTML = ``;
 
       try {
-        const res = await fetch("/predict", {
+        const res = await fetch("http://localhost:5000/predict", {
           method: "POST",
           body: formData,
         });
 
         const data = await res.json();
-
         resultClass.innerHTML = `<strong>Class:</strong> ${data.class}`;
         resultConfidence.innerHTML = `<strong>Confidence:</strong> ${data.confidence}%`;
 
@@ -209,9 +202,7 @@
       }
     }
 
-    // Auto update year
     document.getElementById("year").textContent = new Date().getFullYear();
   </script>
-
 </body>
 </html>
