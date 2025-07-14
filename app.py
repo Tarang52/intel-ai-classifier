@@ -21,7 +21,7 @@ CORS(app)
 
 # ───── Model Initialization ─────
 print("🚀 Initializing EfficientNetB0 model...")
-base_model = EfficientNetB0(include_top=False, weights="imagenet", input_shape=(*IMG_SIZE, 3))
+base_model = EfficientNetB0(include_top=False, weights=None, input_shape=(*IMG_SIZE, 3))
 base_model.trainable = False
 
 inputs = layers.Input(shape=(*IMG_SIZE, 3))
@@ -91,5 +91,6 @@ def predict():
 
 # ───── Run Server ─────
 if __name__ == "__main__":
-    print("🟢 Flask API running on http://localhost:5000")
-    app.run(debug=True)
+    from waitress import serve  # optional for local test
+    print("🟢 Running locally with Waitress...")
+    serve(app, host="0.0.0.0", port=5000)
